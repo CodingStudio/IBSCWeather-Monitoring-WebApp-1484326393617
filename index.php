@@ -4,10 +4,18 @@
 <head>
     <title>Weather Monitoring Dashboard</title>
  
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async: true"></script>           
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async:true"></script>           
      
     <script>
-        <?php require('vendor/autoload.php'); $services_json = json_decode(getenv('VCAP_SERVICES'),true); $VcapSvs = $services_json["cloudantNoSQLDB"][0]["credentials"]; $username = $VcapSvs["username"]; $password = $VcapSvs["password"]; try { $sag = new Sag($username . ".cloudant.com"); $sag->login($username, $password);
+        <?php require('vendor/autoload.php'); 
+	$services_json = json_decode(getenv('VCAP_SERVICES'),true); 
+	$VcapSvs = $services_json["cloudantNoSQLDB"][0]["credentials"]; 
+	$username = $VcapSvs["username"]; 
+	$password = $VcapSvs["password"]; 
+
+	try { 
+		$sag = new Sag($username . ".cloudant.com"); 
+		$sag->login($username, $password);
  
                 $sag->setDatabase("weather-db");
  
@@ -25,7 +33,12 @@
                                          
                     echo $value;
                                 
-                    if($currentRow < $resultCount) { echo ","; } } echo "];"; $currentRow = 0; echo "var tempData = ["; $resultCount = $sag->getAllDocs()->body->total_rows;
+                    if($currentRow < $resultCount) {echo ","; } 
+		} 
+		echo "];"; 
+		$currentRow = 0; 
+		echo "var tempData = ["; 
+		$resultCount = $sag->getAllDocs()->body->total_rows;
                  
                 foreach($sag->getAllDocs()->body->rows as $row)
                 {
@@ -36,8 +49,14 @@
                                          
                     echo $value;
                                 
-                    if($currentRow < $resultCount) { echo ","; } } echo "];"; } catch(Exception $e) { echo ' [INFO] There was an error getting data from Cloudant '; echo $e->getMessage();
-            }
+                    if($currentRow < $resultCount) { echo ","; } 
+		} 
+		echo "];"; 
+	} 
+	catch(Exception $e) { 
+		echo ' [INFO] There was an error getting data from Cloudant '; 
+		echo $e->getMessage();
+        }
         ?>
  
         require([
@@ -104,22 +123,12 @@
  
 <body style="background-color: #F5EEE6">
  
- 
 <div style="align: center;"><font size="5px">Weather Monitoring Dashboard</font></div>
- 
- 
-     
- 
  
 <div id="chartNode" style="width:800px;height:400px;"></div>
  
- 
- 
- 
 <div id="legend"></div>
- 
- 
-             
+         
     <script type="text/javascript">
         init();
     </script>
