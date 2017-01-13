@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: IBSCWeather-Monitoring-WebApp
+  host: IBSCWeather-Monitoring-WebApp
+  disk_quota: 1024M
+  services:
+  - IBSCWeatherMonitoringSystem-cloudantNoSQLDB
