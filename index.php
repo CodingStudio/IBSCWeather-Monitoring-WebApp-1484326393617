@@ -2,30 +2,32 @@
 <html lang="en">
  
 <head>
-    <title>Weather Monitoring Dashboard</title>
- 
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async:true"></script>           
-     
+    <title>IBSC Weather Monitoring Dashboard</title>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async:true"></script>  
+    
     <script>
-        <?php require('vendor/autoload.php'); 
-	$services_json = json_decode(getenv('VCAP_SERVICES'),true); 
-	$VcapSvs = $services_json["cloudantNoSQLDB"][0]["credentials"]; 
-	$username = $VcapSvs["username"]; 
-	$password = $VcapSvs["password"]; 
-
-	try { 
-		$sag = new Sag($username . ".cloudant.com"); 
-		$sag->login($username, $password);
+	<?php 
+		require('vendor/autoload.php'); 
+		$services_json = json_decode(getenv('VCAP_SERVICES'),true); 
+		$VcapSvs = $services_json["cloudantNoSQLDB"][0]["credentials"]; 
+		$username = $VcapSvs["username"]; 
+		$password = $VcapSvs["password"]; 
+		
+		try 
+		{ 
+			$sag = new Sag($username . ".cloudant.com"); 
+			$sag->login($username, $password);
  
-                $sag->setDatabase("weather-db");
+            $sag->setDatabase("weather-db");
  
-                $currentRow = 0;
-                echo "var humidityData = [";
+            $currentRow = 0;
+            echo "var humidityData = [";
                  
-                $resultCount = $sag->getAllDocs()->body->total_rows;
+            $resultCount = $sag->getAllDocs()->body->total_rows;
                  
-                foreach($sag->getAllDocs()->body->rows as $row)
-                {
+            foreach($sag->getAllDocs()->body->rows as $row)
+            {
                     $currentRow = $currentRow + 1;
                      
                     $id = $row->id;
@@ -33,15 +35,19 @@
                                          
                     echo $value;
                                 
-                    if($currentRow < $resultCount) {echo ","; } 
-		} 
-		echo "];"; 
-		$currentRow = 0; 
-		echo "var tempData = ["; 
-		$resultCount = $sag->getAllDocs()->body->total_rows;
+                    if($currentRow < $resultCount) 
+                    {
+                    	echo ","; 
+                    } 
+			} 	
+			echo "];"; 
+			
+			$currentRow = 0; 
+			echo "var tempData = ["; 
+			$resultCount = $sag->getAllDocs()->body->total_rows;
                  
-                foreach($sag->getAllDocs()->body->rows as $row)
-                {
+            foreach($sag->getAllDocs()->body->rows as $row)
+            {
                     $currentRow = $currentRow + 1;
                      
                     $id = $row->id;
@@ -49,17 +55,22 @@
                                          
                     echo $value;
                                 
-                    if($currentRow < $resultCount) { echo ","; } 
+                    if($currentRow < $resultCount) 
+                    {
+                    	echo ","; 
+                    } 
+			} 
+			echo "];"; 
 		} 
-		echo "];"; 
-	} 
-	catch(Exception $e) { 
-		echo ' [INFO] There was an error getting data from Cloudant '; 
-		echo $e->getMessage();
-        }
-        ?>
- 
-        require([
+		catch(Exception $e) 
+		{ 
+			echo " [INFO] There was an error getting data from Cloudant "; 
+			echo $e->getMessage();
+        }	
+		
+	?>
+	
+	require([
              // Basic Chart Class
             "dojox/charting/Chart",
          
@@ -118,19 +129,23 @@
             // Create the legend
             var legend = new Legend({ chart: chart }, "legend");
         });
-    </script>    
+	
+	</script>
+	
+     
 </head>
  
 <body style="background-color: #F5EEE6">
  
-<div style="align: center;"><font size="5px">Weather Monitoring Dashboard</font></div>
+<div style="align: center;"><font size="5px">IBSC Weather Monitoring Dashboard</font></div>
  
 <div id="chartNode" style="width:800px;height:400px;"></div>
  
 <div id="legend"></div>
-         
-    <script type="text/javascript">
+
+<script type="text/javascript">
         init();
-    </script>
+</script>         
+    
 </body>
 </html>
