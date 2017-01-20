@@ -28,6 +28,8 @@
                  
             foreach($sag->getAllDocs()->body->rows as $row)
             {
+				if($currentRow<10)
+				{
                     $currentRow = $currentRow + 1;
                      
                     $id = $row->id;
@@ -39,6 +41,14 @@
                     {
                     	echo ","; 
                     } 
+				}
+				else
+				{
+					
+					break;
+				}
+
+
 			} 	
 			echo "];"; 
 			
@@ -48,6 +58,8 @@
                  
             foreach($sag->getAllDocs()->body->rows as $row)
             {
+				if($currentRow<10)
+				{
                     $currentRow = $currentRow + 1;
                      
                     $id = $row->id;
@@ -59,6 +71,13 @@
                     {
                     	echo ","; 
                     } 
+				}
+				else
+				{
+					
+					break;
+				}
+
 			} 
 			echo "];"; 
 		} 
