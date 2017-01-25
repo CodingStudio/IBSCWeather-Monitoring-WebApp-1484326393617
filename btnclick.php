@@ -37,14 +37,27 @@
 		else
 		{
 			if($val == 'on')
+			{
 				$mqtt->publish("iot-2/evt/text/fmt/json","{ \"d\": { \"text\": \"ON\"}}", 0);
+				$mqtt->close();
+				
+				$status = "status=on";
+			}
 			else
+			{
 				$mqtt->publish("iot-2/evt/text/fmt/json","{ \"d\": { \"text\": \"OFF\"}}", 0);
+				$mqtt->close();
+				
+				$status = "status=off";
+			}
+
 			
-		  	$mqtt->close();
+		  	
 		}
 		
-		header("location:javascript://history.go(-1)");
+		//header("location:javascript://history.go(-1)");
+		header("Location: https://ibscweather-monitoring-webapp.mybluemix.net/relayonoff.php?" . $status); /* Redirect browser */
+		exit();
     }
     
     

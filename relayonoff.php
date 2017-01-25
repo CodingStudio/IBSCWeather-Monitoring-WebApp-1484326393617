@@ -20,8 +20,26 @@ input {
 <body>
 <h1>Relay Control</h1>
 <form action="btnclick.php" method="get">
-            <input type="submit" name="on" value="on">
-            <input type="submit" name="off" value="off">
-        </form>
+
+<?php
+if (isset($_GET['status'])) {
+	if($_GET['status'] == "on")
+	{
+    	echo "<input type=\"submit\" name=\"on\" value=\"on\" disabled=\"disabled\">&nbsp;&nbsp;&nbsp;";
+		echo "<input type=\"submit\" name=\"off\" value=\"off\">";
+	}
+	else
+	{
+		echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;";
+		echo "<input type=\"submit\" name=\"off\" value=\"off\" disabled=\"disabled\">";
+	}
+
+}else{
+    echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;";
+	echo "<input type=\"submit\" name=\"off\" value=\"off\" disabled=\"disabled\">";
+}
+?>
+
+</form>
 </body>
 </html>
