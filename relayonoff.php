@@ -7,12 +7,15 @@
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
 }
 
 
 input {
-	font-size: 32px;
+	font-size: 70px;
 }
+
+
 </style>
 
 </head>
@@ -22,23 +25,26 @@ input {
 <form action="btnclick.php" method="get">
 
 <?php
+
 if (isset($_GET['status'])) {
 	if($_GET['status'] == "on")
 	{
-    	echo "<input type=\"submit\" name=\"on\" value=\"on\" disabled=\"disabled\">&nbsp;&nbsp;&nbsp;";
+    	echo "<input type=\"submit\" name=\"on\" value=\"on\" disabled=\"disabled\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		echo "<input type=\"submit\" name=\"off\" value=\"off\">";
 	}
 	else
 	{
-		echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;";
+		echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		echo "<input type=\"submit\" name=\"off\" value=\"off\" disabled=\"disabled\">";
 	}
 
 }else{
-    echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;";
+    echo "<input type=\"submit\" name=\"on\" value=\"on\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	echo "<input type=\"submit\" name=\"off\" value=\"off\" disabled=\"disabled\">";
 }
+
 ?>
+
 
 </form>
 </body>
